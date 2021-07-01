@@ -1,4 +1,5 @@
 import React from "react";
+import { LinkContainer } from "react-router-bootstrap";
 import { Navbar, Nav, Container } from "react-bootstrap";
 
 const Header = () => {
@@ -6,21 +7,29 @@ const Header = () => {
     <header>
       <Navbar bg="dark" variant="dark" expand="lg" collapseOnSelect>
         <Container>
-          <Navbar.Brand href="/">eShop</Navbar.Brand>
+          <LinkContainer to="/">
+            <Navbar.Brand>eShop</Navbar.Brand>
+          </LinkContainer>
+
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse
             id="basic-navbar-nav"
             className="justify-content-end"
           >
             <Nav>
-              <Nav.Link href="/cart">
-                <i className="fas fa-shopping-cart"></i>
-                <span className="ml-1">Cart</span>
-              </Nav.Link>
-              <Nav.Link href="/login">
-                <i className="fas fa-user"></i>
-                Sign In
-              </Nav.Link>
+              <LinkContainer to="/cart">
+                <Nav.Link>
+                  <i className="fas fa-shopping-cart"></i>
+                  <span className="p-2">Cart</span>
+                </Nav.Link>
+              </LinkContainer>
+
+              <LinkContainer to="/loging">
+                <Nav.Link>
+                  <i className="fas fa-user"></i>
+                  <span className="p-2"> Sign In</span>
+                </Nav.Link>
+              </LinkContainer>
             </Nav>
           </Navbar.Collapse>
         </Container>
