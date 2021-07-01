@@ -2,6 +2,7 @@
   "name": "eshop",
   "version": "1.0.0",
   "main": "index.js",
+  "type": "module",
   "repository": "https://github.com/ArtyomZayarny/eStore.git",
   "author": "ArtyomZayarny <artyom.zayarny@gmail.com>",
   "license": "MIT",
