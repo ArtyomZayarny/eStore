@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Row, Col, Image, ListGroup, Card, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux'
+import axios from "axios";
 import Rating from "../components/Rating";
 import { listProductDetails } from '../actions/productActions'
 import Loader from "../components/loader";
@@ -9,8 +10,8 @@ import Message from "../components/message";
 
 export const ProductScreen = ({ match }) => {
   const dispatch = useDispatch();
-  const productDetails = useSelector(state => state.productDetails)
-  const { loading, error, product } = productDetails;
+  const productDetails = useSelector(state => state.listProductDetails)
+  const { loading, error, product } = productDetailsж
   useEffect(() => {
     dispatch(listProductDetails(match.params.id))
   }, [match, dispatch]);

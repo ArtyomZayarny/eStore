@@ -9,7 +9,7 @@ import Message from "../components/message";
 
 export const ProductScreen = ({ match }) => {
   const dispatch = useDispatch();
-  const productDetails = useSelector(state => state.productDetails)
+  const productDetails = useSelector(state => state.listProductDetails)
   const { loading, error, product } = productDetails;
   useEffect(() => {
     dispatch(listProductDetails(match.params.id))
