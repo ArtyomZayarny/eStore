@@ -21,10 +21,7 @@ export const HomeScreen = () => {
       {loading ?
         (<Loader />)
         : error ?
-          (<Message variant='danger'>
-            {error}
-          </Message>
-          )
+          (<Message variant='danger' />)
           : (
             <Row>
               {products.map(product => (
