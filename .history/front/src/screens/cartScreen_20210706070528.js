@@ -13,6 +13,7 @@ export default function CartScreen({ match, location, history }) {
   const dispatch = useDispatch()
   const cart = useSelector(state => state.cart)
   const { cartItems } = cart;
+  console.log(cartItems)
   useEffect(() => {
     if (productId) {
       dispatch(addToCart(productId, qty))
@@ -21,10 +22,6 @@ export default function CartScreen({ match, location, history }) {
 
   const removeFromCartHandler = (id) => {
     console.log(id)
-  }
-
-  const checkOutHandler = () => {
-    history.push('/login?redirect=shipping')
   }
 
   return (
@@ -43,8 +40,7 @@ export default function CartScreen({ match, location, history }) {
                         <Image
                           src={item.image}
                           alt={item.name}
-                          fluid
-                          rounded
+                          fluidrounded
                         />
                       </Col>
                       <Col md={3}>
@@ -56,7 +52,7 @@ export default function CartScreen({ match, location, history }) {
                       <Col md={2}>
                         <Form.Control
                           as='select'
-                          value={item.qty}
+                          value={qty}
                           onChange={(e) => {
                             dispatch(addToCart(item.product, Number(e.target.value)))
                           }}>
@@ -78,28 +74,6 @@ export default function CartScreen({ match, location, history }) {
               </ListGroup>
             )
         }
-      </Col>
-      <Col md={4}>
-        <Card>
-          <ListGroup variant="flash">
-            <ListGroup.Item>
-              <h2>Subtotal ({cartItems.reduce((acc, item) => acc + item.qty, 0)}) items</h2>
-              ${cartItems
-                .reduce((acc, item) => acc + item.qty * item.price, 0)
-                .toFixed(2)}
-            </ListGroup.Item>
-          </ListGroup>
-          <ListGroup>
-            <Button
-              type="button"
-              className="btn-block"
-              disabled={cartItems.length === 0}
-              onClick={checkOutHandler}
-            >
-              Proceed to Checkout
-            </Button>
-          </ListGroup>
-        </Card>
       </Col>
     </Row>
   )

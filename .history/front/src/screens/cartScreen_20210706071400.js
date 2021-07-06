@@ -23,10 +23,6 @@ export default function CartScreen({ match, location, history }) {
     console.log(id)
   }
 
-  const checkOutHandler = () => {
-    history.push('/login?redirect=shipping')
-  }
-
   return (
     <Row>
       <Col md={8}>
@@ -56,7 +52,7 @@ export default function CartScreen({ match, location, history }) {
                       <Col md={2}>
                         <Form.Control
                           as='select'
-                          value={item.qty}
+                          value={qty}
                           onChange={(e) => {
                             dispatch(addToCart(item.product, Number(e.target.value)))
                           }}>
@@ -88,16 +84,6 @@ export default function CartScreen({ match, location, history }) {
                 .reduce((acc, item) => acc + item.qty * item.price, 0)
                 .toFixed(2)}
             </ListGroup.Item>
-          </ListGroup>
-          <ListGroup>
-            <Button
-              type="button"
-              className="btn-block"
-              disabled={cartItems.length === 0}
-              onClick={checkOutHandler}
-            >
-              Proceed to Checkout
-            </Button>
           </ListGroup>
         </Card>
       </Col>
