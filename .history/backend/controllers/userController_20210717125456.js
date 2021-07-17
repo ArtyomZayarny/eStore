@@ -32,7 +32,6 @@ const authUser = asyncHandler(async (req, res) => {
 const updateUserProfile = asyncHandler(async (req, res) => {
   const user = await User.findById(req.user._id)
 
-  console.log(req.body)
   if (user) {
     user.name = req.body.name || user.name
     user.email = req.body.email || user.email
@@ -43,11 +42,11 @@ const updateUserProfile = asyncHandler(async (req, res) => {
     const updatedUser = await user.save()
 
     res.status(201).json({
-      _id: updatedUser.id,
-      name: updatedUser.name,
-      email: updatedUser.email,
-      isAdmin: updatedUser.isAdmin,
-      token: generateToken(updatedUser._id)
+      _id: user.id,
+      name: user.name,
+      email: user.email,
+      isAdmin: user.isAdmin,
+      token: generateToken(user._id)
     })
 
 
@@ -106,6 +105,6 @@ const registerUser = asyncHandler(async (req, res) => {
   }
 })
 
-export { authUser, getUserProfile, registerUser, updateUserProfile }
+export { authUser, getUserProfile, registerUser }
 
 
