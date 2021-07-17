@@ -10,7 +10,9 @@ const Header = () => {
   const dispatch = useDispatch();
 
   const { userInfo } = userLogin
-
+  const logoutHandler = () => {
+    dispatch(logout())
+  }
   return (
     <header>
       <Navbar bg="dark" variant="dark" expand="lg" collapseOnSelect>
@@ -18,6 +20,7 @@ const Header = () => {
           <LinkContainer to="/">
             <Navbar.Brand>eShop</Navbar.Brand>
           </LinkContainer>
+
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse
             id="basic-navbar-nav"
@@ -30,7 +33,7 @@ const Header = () => {
                   <span className="p-2">Cart</span>
                 </Nav.Link>
               </LinkContainer>
-              {userInfo ? <Profilelink userName={userInfo.name} />
+              {userInfo ? <Profilelink />
                 : (
                   <LinkContainer to="/login">
                     <Nav.Link>

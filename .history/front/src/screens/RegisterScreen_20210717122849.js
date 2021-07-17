@@ -2,19 +2,22 @@ import React, { useEffect, useState } from 'react'
 import { Form, Row, Col, Button } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import Message from '../components/message'
-import { login } from '../actions/userActions'
+import { register } from '../actions/userActions'
 import FormContainer from '../components/FormContainer'
 import { useDispatch, useSelector } from 'react-redux'
 import Loader from '../components/loader'
 
-export default function LoginScreen({ location, history }) {
+export default function RegisterScreen({ location, history }) {
   const [email, setEmail] = useState('')
+  const [name, setName] = useState('')
   const [password, setPassword] = useState('')
+  const [confirmPassword, setConfirmPassword] = useState('')
+  const [message, setMessage] = useState(null)
 
   const dispatch = useDispatch();
-  const userLogin = useSelector(state => state.userLogin);
+  const userRegister = useSelector(state => state.userRegister);
 
-  const { loading, error, userInfo } = userLogin;
+  const { loading, error, userInfo } = userRegister;
   const redirect = location.search ? location.search.split('=')[1] : '/'
   useEffect(() => {
     if (userInfo) {
@@ -23,16 +26,25 @@ export default function LoginScreen({ location, history }) {
   }, [history, userInfo, redirect])
   const submitHandler = (e) => {
     e.preventDefault()
-    dispatch(login(email, password))
+    //DISPATCH REGISTER
   }
 
   return (
     <FormContainer>
-      <h1>Sign in</h1>
+      <h1>Sign up</h1>
       {error && <Message variant='danger'>{error}</Message>}
       {loading && <Loader />}
       <Form onSubmit={submitHandler}>
-        <Form.Group controlId='email'>
+        <Form.Group controlId='name'>
+          <Form.Label>Name</Form.Label>
+          <Form.Control
+            type='name'
+            placeholder='Your name'
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          ></Form.Control>
+        </Form.Group>
+        <Form.Group>
           <Form.Label>Email address</Form.Label>
           <Form.Control
             type='email'
@@ -42,7 +54,7 @@ export default function LoginScreen({ location, history }) {
           ></Form.Control>
         </Form.Group>
 
-        <Form.Group controlId='password'>
+        <Form.Group>
           <Form.Label>Password</Form.Label>
           <Form.Control
             type='password'
@@ -61,8 +73,10 @@ export default function LoginScreen({ location, history }) {
           New Customer ?
           <Link
             to={redirect
-              ? `/register?/redirect=${redirect}`
-              : '/register'}>Register</Link>
+              ? `/redirect?/redirect=${redirect}`
+              : '/register'}>
+            Register
+          </Link>
         </Col>
       </Row>
     </FormContainer>

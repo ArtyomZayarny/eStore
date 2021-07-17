@@ -42,7 +42,7 @@ export default function LoginScreen({ location, history }) {
           ></Form.Control>
         </Form.Group>
 
-        <Form.Group controlId='password'>
+        <Form.Group>
           <Form.Label>Password</Form.Label>
           <Form.Control
             type='password'
@@ -61,8 +61,10 @@ export default function LoginScreen({ location, history }) {
           New Customer ?
           <Link
             to={redirect
-              ? `/register?/redirect=${redirect}`
-              : '/register'}>Register</Link>
+              ? `/redirect?/redirect=${redirect}`
+              : '/register'}>
+            Register
+          </Link>
         </Col>
       </Row>
     </FormContainer>

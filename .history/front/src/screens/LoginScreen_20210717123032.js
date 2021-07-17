@@ -61,8 +61,10 @@ export default function LoginScreen({ location, history }) {
           New Customer ?
           <Link
             to={redirect
-              ? `/register?/redirect=${redirect}`
-              : '/register'}>Register</Link>
+              ? `/redirect?/redirect=${redirect}`
+              : '/register'}>
+            Register
+          </Link>
         </Col>
       </Row>
     </FormContainer>
