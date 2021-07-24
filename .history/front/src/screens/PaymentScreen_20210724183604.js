@@ -2,13 +2,17 @@ import React, { useState } from 'react'
 import { Button, Form } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { saveShippingAddress } from '../actions/cartActions'
-import Checoutsteps from '../components/CheckoutSteps'
+import Checoutsteps from '../components/ChecoutSteps'
 import FormContainer from '../components/FormContainer'
 
-export default function ShippingScreen({ history }) {
+export default function PaymentScreen({ history }) {
 
   const cart = useSelector(state => state.cart)
   const { shippingAddress } = cart
+
+  if (!shippingAddress) {
+    history.push('/shipping')
+  }
 
   const [address, setAddress] = useState(shippingAddress.address)
   const [city, setCity] = useState(shippingAddress.city)
