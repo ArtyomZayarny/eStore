@@ -38,7 +38,6 @@ export default function PlaceOrderScreen({ history }) {
   }, [history, success])
 
   const placeOrderHandler = () => {
-    console.log('cart', cart)
     dispatch(createOrder({
       orderItems: cart.cartItems,
       shippingAddress: cart.shippingAddress,

@@ -31,7 +31,7 @@ const addOrdeItems = asyncHandler(async (req, res) => {
       shippingPrice,
       totalPrice
     })
-
+    console.log('order', order)
     const createdOrder = await order.save();
     res.status(201).json(createdOrder)
   }
