@@ -3,6 +3,7 @@ import { Card, Col, Image, ListGroup, Row, Button } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { getOrderDetails } from '../actions/orderActions'
+import Checkoutsteps from '../components/CheckoutSteps'
 import Loader from '../components/loader'
 import Message from '../components/message'
 
