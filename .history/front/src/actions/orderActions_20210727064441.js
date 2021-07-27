@@ -1,10 +1,7 @@
 import {
   ORDER_CREATE_FAIL,
   ORDER_CREATE_SUCCESS,
-  ORDER_CREATE_REQUEST,
-  ORDER_DETAILS_FAIL,
-  ORDER_DETAILS_SUCCESS,
-  ORDER_DETAILS_REQUEST
+  ORDER_CREATE_REQUEST
 } from '../constants/orderConstans'
 import axios from 'axios'
 
@@ -51,11 +48,12 @@ export const getOrderDetails = (id) => async (dispatch, getState) => {
 
     const config = {
       headers: {
+        'Content-Type': 'application/json',
         Authorization: `Bearer ${userInfo.token}`
       }
     }
 
-    const { data } = await axios.get(`/api/orders/:${id}`, config)
+    const { data } = await axios.post(`/api/orders`, order, config)
 
     dispatch({
       type: ORDER_DETAILS_SUCCESS,
