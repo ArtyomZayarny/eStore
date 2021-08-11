@@ -175,7 +175,7 @@ export default function OrderScreen({ match }) {
                     {loadingPay && <Loader/>}
                     {!sdkReady ? <Loader/> : (
                       <PayPalButton 
-                      amount={order.totaPrice}
+                      amount={order.totalPrice}
                       onSuccess={successPaymenthandler}
                       />
                     )}
