@@ -34,7 +34,6 @@ export default function ProfileScreen({ location, history }) {
     if (!userInfo) {
       history.push('/login')
     } else {
-      console.log('user', user)
       if (!user.name) {
         dispatch(getUserDetails('profile'))
         dispatch(listMyOrders())
