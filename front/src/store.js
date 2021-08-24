@@ -1,12 +1,24 @@
-import { createStore, combineReducers, applyMiddleware } from 'redux'
-import thunk from 'redux-thunk'
-import { composeWithDevTools } from 'redux-devtools-extension'
-import { productListReducer } from './reducers/productReducer'
-import { productDetailsReducer } from './reducers/productReducer'
-import { cartReducer } from './reducers/cartReducer'
-import { userDeleteReducer, userDetailsReducer, userListReducer, userLoginReducer, userRegisterReducer, userUpdatProfileReducer } from './reducers/userReducer'
-import { orderDetailsReducer, orderCreateReducer, orderPayReducer, orderListMyReducer } from './reducers/orderReducers'
-
+import { createStore, combineReducers, applyMiddleware } from "redux";
+import thunk from "redux-thunk";
+import { composeWithDevTools } from "redux-devtools-extension";
+import { productListReducer } from "./reducers/productReducer";
+import { productDetailsReducer } from "./reducers/productReducer";
+import { cartReducer } from "./reducers/cartReducer";
+import {
+  userDeleteReducer,
+  userDetailsReducer,
+  userListReducer,
+  userLoginReducer,
+  userRegisterReducer,
+  userUpdateReducer,
+  userUpdatProfileReducer
+} from "./reducers/userReducer";
+import {
+  orderDetailsReducer,
+  orderCreateReducer,
+  orderPayReducer,
+  orderListMyReducer
+} from "./reducers/orderReducers";
 
 const reducer = combineReducers({
   productList: productListReducer,
@@ -21,16 +33,17 @@ const reducer = combineReducers({
   orderPay: orderPayReducer,
   orderListMy: orderListMyReducer,
   userList: userListReducer,
-  userDelete: userDeleteReducer
-})
+  userDelete: userDeleteReducer,
+  userUpdate: userUpdateReducer
+});
 
-const cartItems = localStorage.getItem('cartItems');
+const cartItems = localStorage.getItem("cartItems");
 const cartItemsFromStorage = cartItems ? JSON.parse(cartItems) : [];
-const userInfoFromStorage = localStorage.getItem('userInfo')
-  ? JSON.parse(localStorage.getItem('userInfo'))
-  : null
-const shippingAddressFromStorage = localStorage.getItem('shippingAddress')
-  ? JSON.parse(localStorage.getItem('shippingAddress'))
+const userInfoFromStorage = localStorage.getItem("userInfo")
+  ? JSON.parse(localStorage.getItem("userInfo"))
+  : null;
+const shippingAddressFromStorage = localStorage.getItem("shippingAddress")
+  ? JSON.parse(localStorage.getItem("shippingAddress"))
   : {};
 
 const initialState = {
@@ -39,13 +52,14 @@ const initialState = {
     shippingAddress: shippingAddressFromStorage
   },
   userLogin: { userInfo: userInfoFromStorage }
-}
+};
 
-const middleware = [thunk]
+const middleware = [thunk];
 
 const store = createStore(
   reducer,
   initialState,
-  composeWithDevTools(applyMiddleware(...middleware)))
+  composeWithDevTools(applyMiddleware(...middleware))
+);
 
-export default store
+export default store;
