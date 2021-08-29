@@ -6,10 +6,7 @@ import FormContainer from "../components/FormContainer";
 import { useDispatch, useSelector } from "react-redux";
 import Loader from "../components/loader";
 import { getUserDetails, updateUser } from "../actions/userActions";
-import {
-  USER_UPDATE_RESET,
-  USER_UPDATE_SUCCESS
-} from "../constants/userConstants";
+import { USER_UPDATE_RESET } from "../constants/userConstants";
 
 export default function UserEditScreen({ match, history }) {
   const userId = match.params.id;

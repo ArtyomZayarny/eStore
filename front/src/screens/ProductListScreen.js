@@ -2,10 +2,11 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Loader } from "../components/loader";
 import { Button, Table, Row, Col } from "react-bootstrap";
-import { deleteProduct } from "../actions/productActions";
+import { createProduct, deleteProduct } from "../actions/productActions";
 import Message from "../components/message";
 import { LinkContainer } from "react-router-bootstrap";
 import { listProducts } from "../actions/productActions";
+import { PRODUCT_CREATE_RESET } from "../constants/productConstants";
 
 export default function ProductListScreen({ history, match }) {
   const dispatch = useDispatch();
@@ -19,16 +20,36 @@ export default function ProductListScreen({ history, match }) {
     success: successDelete
   } = productDelete;
 
+  const productCreate = useSelector(state => state.productCreate);
+  const {
+    loading: loadingCreate,
+    error: errorCreate,
+    success: successCreate,
+    product: createdProduct
+  } = productCreate;
+
   const userLogin = useSelector(state => state.userLogin);
   const { userInfo } = userLogin;
 
   useEffect(() => {
-    if (userInfo && userInfo.isAdmin) {
-      dispatch(listProducts());
-    } else {
+    dispatch({ type: PRODUCT_CREATE_RESET });
+
+    if (!userInfo.isAdmin) {
       history.push("/login");
     }
-  }, [dispatch, history, userInfo, successDelete]);
+    if (successCreate) {
+      history.push(`/admin/product/${createdProduct._id}/edit`);
+    } else {
+      dispatch(listProducts());
+    }
+  }, [
+    dispatch,
+    history,
+    userInfo,
+    successDelete,
+    successCreate,
+    createdProduct
+  ]);
 
   const deleteHandler = id => {
     if (window.confirm("Are you sure")) {
@@ -36,7 +57,9 @@ export default function ProductListScreen({ history, match }) {
     }
   };
 
-  const createProductHandler = () => {};
+  const createProductHandler = () => {
+    dispatch(createProduct());
+  };
   return (
     <>
       <Row className="align-items-center">
@@ -51,6 +74,8 @@ export default function ProductListScreen({ history, match }) {
       </Row>
       {loadingDelete && <Loader />}
       {errorDelete && <Message variant="danger">{errorDelete}</Message>}
+      {loadingCreate && <Loader />}
+      {errorCreate && <Message variant="danger">{errorCreate}</Message>}
       {loading ? (
         <Loader />
       ) : error ? (
