@@ -5,6 +5,7 @@ import Message from "../components/message";
 import { getListOrders } from "../actions/orderActions";
 import { useDispatch, useSelector } from "react-redux";
 import Loader from "../components/loader";
+import { ORDER_LIST_RESET } from "../constants/orderConstans";
 
 export default function OrderListScreen({ history }) {
   const dispatch = useDispatch();
@@ -20,7 +21,8 @@ export default function OrderListScreen({ history }) {
   } = orderList;
 
   useEffect(() => {
-    if (!userInfo.isAdmin) {
+    dispatch({ type: ORDER_LIST_RESET });
+    if (!userInfo) {
       history.push("/login");
     } else {
       dispatch(getListOrders());
