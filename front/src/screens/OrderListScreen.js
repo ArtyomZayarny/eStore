@@ -28,6 +28,7 @@ export default function OrderListScreen({ history }) {
       dispatch(getListOrders());
     }
   }, [history, userInfo, dispatch]);
+  console.log("ordersList", ordersList);
   return (
     <Col>
       <h2>My orders</h2>
@@ -69,7 +70,7 @@ export default function OrderListScreen({ history }) {
                 </td>
                 <td>
                   {
-                    <LinkContainer to={`/order/${order._id}`}>
+                    <LinkContainer to={`/admin/order/${order._id}`}>
                       <Button className="btn-sm" variant="light">
                         Details
                       </Button>
