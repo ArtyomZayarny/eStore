@@ -38,6 +38,8 @@ export default function OrderScreen({ match, history }) {
     const addDecimals = num => {
       return (Math.round(num * 100) / 100).toFixed(2);
     };
+
+    console.log("order", order);
     //Calculate price
     order.itemsPrice = addDecimals(
       order.orderItems.reduce((acc, item) => acc + item.price * item.qty, 0)
@@ -60,8 +62,8 @@ export default function OrderScreen({ match, history }) {
       };
       document.body.appendChild(script);
     };
+
     if (!order || successPay || successDeliver) {
-      console.log("update order");
       dispatch({ type: ORDER_PAY_RESET });
       dispatch({ type: ORDER_DELIVER_RESET });
       dispatch(getOrderDetails(orderId));
