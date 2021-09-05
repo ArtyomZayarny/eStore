@@ -39,7 +39,6 @@ export default function OrderScreen({ match, history }) {
       return (Math.round(num * 100) / 100).toFixed(2);
     };
 
-    console.log("order", order);
     //Calculate price
     order.itemsPrice = addDecimals(
       order.orderItems.reduce((acc, item) => acc + item.price * item.qty, 0)
@@ -48,7 +47,7 @@ export default function OrderScreen({ match, history }) {
 
   useEffect(() => {
     if (!userInfo) {
-      history.push("/logiin");
+      history.push("/login");
     }
     const addPatPalScript = async () => {
       const { data: clientId } = await axios.get("/api/config/paypal");
@@ -77,7 +76,6 @@ export default function OrderScreen({ match, history }) {
   }, [dispatch, orderId, successPay, order, successDeliver]);
 
   const successPaymenthandler = paymentResult => {
-    console.log("success Payment");
     dispatch(payOrder(orderId, paymentResult));
   };
 
