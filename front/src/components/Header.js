@@ -1,8 +1,10 @@
 import React from "react";
+import { Route } from "react-router-dom";
 import { LinkContainer } from "react-router-bootstrap";
 import { Navbar, Nav, Container, NavDropdown } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import Profilelink from "./ProfileLink";
+import SearchBox from "./SearchBox";
 
 const Header = () => {
   const userLogin = useSelector(state => state.userLogin);
@@ -15,6 +17,7 @@ const Header = () => {
           <LinkContainer to="/">
             <Navbar.Brand>eShop</Navbar.Brand>
           </LinkContainer>
+          <Route render={({ history }) => <SearchBox history={history} />} />
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse
             id="basic-navbar-nav"
