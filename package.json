@@ -12,7 +12,8 @@
     "client": "yarn --cwd front start",
     "dev": "concurrently \"yarn run server\" \"yarn run client\"",
     "data:import": "node backend/seeder",
-    "data:destroy": "node backend/seeder -d"
+    "data:destroy": "node backend/seeder -d",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix front && npm run build --prefix front"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
